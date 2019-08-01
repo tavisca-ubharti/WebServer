@@ -29,9 +29,12 @@ namespace WebServerForBrowser
 
             sbHeader.AppendLine("HTTP/1.1 200 OK");
 
-
-            sbHeader.AppendLine("Content-Type: text/html;charset=UTF-8");
-
+            var pathFormat = requestPath.Split('.');
+            var fileFormat = pathFormat[pathFormat.Length - 1].Trim();
+            if(!fileFormat.Equals("html"))
+                sbHeader.AppendLine("Content-Type: image/"+fileFormat+";charset=UTF-8");
+            else
+                sbHeader.AppendLine("Content-Type: text/"+fileFormat+";charset=UTF-8");
             sbHeader.AppendLine();
 
             List<byte> response = new List<byte>();
